@@ -7,6 +7,7 @@ import time, datetime
 
 
 
+
 def write(symbol,name, price, yesterdey_price, Time):
 
     file_name = 'price_bitcoin.csv'
@@ -25,17 +26,40 @@ def write(symbol,name, price, yesterdey_price, Time):
         raise e
 
 
-end_time = '21:00:00'
+interval = 60 # sec
 
-while True:
 
-    time_now = datetime.datetime.now().strftime("%H:%M:%S")
+user = input("timer or round? ").strip().lower()
 
-    if time_now >= end_time:
-        break
 
-    symbol,name, price, yesterdey_price, Time = information()
 
-    print(f'writing price. time now {time_now} . end {end_time}')
-    write(symbol,name,price,yesterdey_price,Time)
-    time.sleep(180)
+
+if user in ['timer', 'time']:
+    minutes = int(input('How many minutes do you want to run? '))
+
+    end_time = time.time() + minutes * 60
+
+    while time.time() < end_time:
+        symbol, name, price, yesterday_price, Time = information()
+        write(symbol, name, price, yesterday_price, Time)
+        print(f'Written at {Time}')
+
+        time.sleep(interval)
+
+
+
+elif user in ['round', 'times']:
+    rounds = int(input('How many rounds do you want? '))
+
+    for i in range(rounds):
+        symbol, name, price, yesterday_price, Time = information()
+        write(symbol, name, price, yesterday_price, Time)
+        print(f'Written at {Time}')
+
+        time.sleep(interval)
+
+else:
+    print("Invalid option. Choose 'timer' or 'round'")
+
+
+
