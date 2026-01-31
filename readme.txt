@@ -9,6 +9,14 @@ https://api.diadata.org/v1/assetQuotation/Bitcoin/0x0000000000000000000000000000
 
 read api and store the data in a csv file to use for Machine Learning models or reaserch
 
+first you need ti determine how it should work.
+
+the Time and Round :
+
+Time: you work with minute. determine the how much minute the app run
+
+round: you work with round. determine the how much round and row add to csv
+
 
 ## Features
 - read api 
